@@ -1,9 +1,27 @@
+const fs = require('fs');
+const path = require('path');
 const router = require('express').Router(); //вызываем метод Router
 
-const cards = require('../data/cards.json');
+const pathToCards = path.join(__dirname, '../data/cards.json');
 
-router.get('/cards', (req,res) =>{
-  res.send(cards);
+router.get('/', (req, res) => {
+  const reader = fs.createReadStream(pathToCards, {
+    encoding: 'utf8'
+  });
+
+  reader.on('error', (err) => {
+    res.status(500).send({
+      Error: "Ошибка сервера"
+    });
+  });
+
+  reader.on('open', () => {
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8'
+    });
+    reader.pipe(res);
+  });
+
 });
 
 module.exports = router; //экспорт роутера
