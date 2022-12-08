@@ -11,7 +11,7 @@
   "license": "ISC",
   "homepage": "https://github.com/Chukmarov/Chukmarov.github.io-YandexPraktikum_Project12_ServerFoundation",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "eslint": "^7.5.0",
